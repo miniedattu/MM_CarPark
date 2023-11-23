@@ -1,4 +1,4 @@
-class Carpark:
+class CarPark:
     def __init__(self,
                  location,
                  capacity,
