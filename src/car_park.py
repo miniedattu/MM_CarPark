@@ -12,17 +12,22 @@ class CarPark:
         self.plates = plates or []
         self.displays = displays or []
         self.sensors = sensors or []
+
+    @property
+    def available_bays(self):
+        # car_park.available_bays
+        return self.capacity - len(self.plates)
     def __str__(self):
         return f"Carpark at {self.location} with a capacity of {self.capacity} vehicles"
 
     def register(self, component):
         """Registers component of a car park"""
-        if not isinstance(component,(Sensor,Display)):
+        if not isinstance(component, (Sensor, Display)):
             raise TypeError("Invalid component type!")
 
-        if isinstance(component,Sensor):
+        if isinstance(component, Sensor):
             self.sensors.append(component)
-        elif isinstance(component,Display):
+        elif isinstance(component, Display):
             self.sensors.append(component)
 
     def add_car(self,plate):
@@ -33,5 +38,7 @@ class CarPark:
 
     def update_displays(self):
         for display in self.display:
-            display.update()
+            display.update({"Bays": self.available_bays,
+                            "Temperature": 42}
+                           )
             print(f"Updating: {display}")
