@@ -447,7 +447,8 @@ Answer the following questions:
 >
 > 1. **Which class is responsible for each of the following pieces of information (and why)?**
 >    - *The number of available bays*  
->      `Available bays are explaining in the car_park class.`
+>      `Available bays are explaining in the car_park class.
+We can calculate the number of available bays in the CarPark class.`
 >    - *The current temperature*  
 >      `Answer here...`
 >    - *The time*  
