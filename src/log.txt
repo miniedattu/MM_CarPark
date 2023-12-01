@@ -1,0 +1,6 @@
+FAKE-188 entered on the 30-11 17:48
+FAKE-457 entered on the 30-11 17:51
+FAKE-994 entered on the 30-11 17:52
+FAKE-994 exited on the 30-11 17:52
+FAKE-623 entered on the 30-11 18:06
+FAKE-623 exited on the 30-11 18:06

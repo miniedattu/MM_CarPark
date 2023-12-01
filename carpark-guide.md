@@ -447,18 +447,26 @@ Answer the following questions:
 >
 > 1. **Which class is responsible for each of the following pieces of information (and why)?**
 >    - *The number of available bays*  
->      `Available bays are explaining in the car_park class.
-We can calculate the number of available bays in the CarPark class.`
+>      `Available bays are explaining in the CarPark class.
+         The CarPark class is responsible for managing and tracking the available bays based on its capacity.`
 >    - *The current temperature*  
->      `Answer here...`
->    - *The time*  
->      `Answer here...`
->
+>      `The Display class is responsible for the temperature. If the current temperature is shown on the display, 
+>        the Display class is presenting those information.`
+>      - *The time*  
+>        `The time is related to the car park's internal operations. The logging entry and exit times are lie in the 
+>         CarPark class.`
+>           
 > 2. **What is the difference between an attribute and a property?**  
->    `Answer here...`
+>    `An attribute is a characterestic or property of an object. It can be associated with an instance of the class.
+>    A property is a special kind of attribute. It allows controlled access to an attribute.   
+>    `
 >
 > 3. **Why do you think we used a dictionary to hold the data we passed the display? List at least one advantage and one disadvantage of this approach.**  
->    `Answer here...`
+>    `Advantage: Using a dictionary allows flexibility in passing multiple pieces of date to the display. 
+>     We can easily add or remove elements without changing the method signature.
+>     Disadvantage: Dictionaries don't enforce a specific structure, which can lead to errors if the expected 
+>     keys or values are not present.
+>     `
 
 
 #### Add a detect vehicle method to the Sensor class
