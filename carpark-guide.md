@@ -446,22 +446,21 @@ Answer the following questions:
 > **Review Questions**
 >
 > 1. **Which class is responsible for each of the following pieces of information (and why)?**
->    - *The number of available bays*  
->      `Available bays are explaining in the CarPark class.
-         The CarPark class is responsible for managing and tracking the available bays based on its capacity.`
->    - *The current temperature*  
->      `The Display class is responsible for the temperature. If the current temperature is shown on the display, 
->        the Display class is presenting those information.`
->      - *The time*  
->        `The time is related to the car park's internal operations. The logging entry and exit times are lie in the 
->         CarPark class.`
+> - *The number of available bays*  
+>   `Available bays are explaining in the CarPark class.
+      The CarPark class is responsible for managing and tracking the available bays based on its capacity.`
+> - *The current temperature*  
+>   `The Display class is responsible for the temperature. If the current temperature is shown on the display, 
+>     the Display class is presenting those information.`
+> - *The time*  
+>   `The time is related to the car park's internal operations. The logging entry and exit times are lie in the 
+>    CarPark class.`
 >           
 > 2. **What is the difference between an attribute and a property?**  
 >    `An attribute is a characterestic or property of an object. It can be associated with an instance of the class.
 >    A property is a special kind of attribute. It allows controlled access to an attribute.   
 >    `
->
-> 3. **Why do you think we used a dictionary to hold the data we passed the display? List at least one advantage and one disadvantage of this approach.**  
+>> 3. **Why do you think we used a dictionary to hold the data we passed the display? List at least one advantage and one disadvantage of this approach.**  
 >    `Advantage: Using a dictionary allows flexibility in passing multiple pieces of date to the display. 
 >     We can easily add or remove elements without changing the method signature.
 >     Disadvantage: Dictionaries don't enforce a specific structure, which can lead to errors if the expected 
@@ -789,7 +788,9 @@ Finally, we'll create tests for the `Sensor` class. These tests will test the `_
 
 The car park register method should accept a `Sensor` or `Display` object. It should raise a `TypeError` if the object is neither a `Sensor` nor a `Display`. Before proceeding, think about where you would test this behaviour. Should you test it in the `CarPark` unit tests or the `Sensor` unit tests? Why?
 
-> Answer here...
+> We should test the CarPark register method in the CarPark unittests. The reason for this is that the register method is part of the CarPark class's functionality.
+  We are not concerned with the internal working of the Sensor or Display classes, only concerned with how the CarPark class interacts with them.
+  The CarPark class raises TypeError when attempting to register an object that is neither a Sensor nor a Display.
 
 Create a new unit test in the `test_car_park.py` file called `test_register_raises_type_error`. This test should create a `CarPark` object and a `str` object. It should then call the `register` method on the `CarPark` object with the `str` object as a parameter. The test should assert that a `TypeError` is raised. Here is a sample implementation:
 

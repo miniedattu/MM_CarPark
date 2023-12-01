@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import random
+import logging
 class Sensor(ABC):
     def __init__(self, id, car_park, is_active = False):
         self.id = id
@@ -15,6 +16,7 @@ class Sensor(ABC):
         pass
     def detect_vehicle(self):
         plate = self._scan_plate()
+        logging.info(f"Incoming 🚘 vehicle detected. Plate: {plate}")
         self.update_car_park(plate)
     def __str__(self):
         return f'{self.id}: Sensor is {"is active" if self.is_active else "if active"}'
@@ -31,3 +33,6 @@ class ExitSensor(Sensor):
         self.car_park.remove_car(plate)
         print(f"Outgoing 🚘 vehicle detected. Plate: {plate}")
 
+class ConcreteSensor(Sensor):
+    def update_car_park(self, plate):
+        pass
