@@ -8,19 +8,19 @@ class CarPark:
     def __init__(self,
                  location,
                  capacity,
-                 log_file='log.txt',
                  plates=None,
                  sensors=None,
-                 displays=None):
+                 displays=None,
+                 log_file=Path("log.txt")):
         self.location = location
         self.capacity = capacity
         self.plates = plates or []
         self.displays = displays or []
         self.sensors = sensors or []
         # convert file name to path and create it
-        self.log_file = Path(log_file)
-        if not self.log_file.exists():
-            self.log_file.touch()
+        self.log_file = log_file if isinstance(log_file, Path) else Path(log_file)
+        # create the file if it doesn't exist:
+        self.log_file.touch(exist_ok=True)
 
     def to_json(self, file_name):
         with open(file_name,"w") as file:
@@ -69,9 +69,11 @@ class CarPark:
         self.plates.remove(plate)
         self._log_car("exited", plate)
 
+
     def update_displays(self):
         for display in self.displays:
             display.update({"Bays": self.available_bays,
                             "Temperature": 42}
                            )
             print(f"Updating: {display}")
+

@@ -11,7 +11,7 @@ In this assessment, you must design and implement a simplified car park system u
 
 The system will be implemented in Python using the PyCharm IDE. You will use version control to manage your project and submit your work.
 
-This guide provides detailed step-by-step instructions for completing the project. You do **not** have to use this guide, but it will make your life easier and ensure you meet **all** project requirements. If you choose not to follow the guide, read the submission requirements carefully to ensure you meet all the requirements.
+This guide provides detailed step-by-step instructions for completing the project. You do **not** have to use this guide, but it will make your life easier and ensure you meet **all** project requirements. If you choose not to follow the guide, read the submissions requirements carefully to ensure you meet all the requirements.
 
 ## Instructions
 
@@ -120,8 +120,8 @@ Include a screenshot of your GitHub repository `src/` directory **after** you ha
    - `displays`
 2. Add instance variables for each of the parameters. For example, `self.location = location`.
 3. Add a default value for each parameter. For example, `location = "Unknown"`.
-4. Notice that plates, sensors, and displays are lists ("plurals"). Sensors/Displays, hold references to instances of sensors/displays. The `plates` attribute holds references to license plates represented as strings (built-in/primitive types). Specifying these at initialization is optional, but we don't want to use an empty list as the default. For example, `self.sensors = []`. Lists are **mutable**, and we must never set mutable defaults for parameters. Thus we make the defaults `None`.
-5. Add a `__str__` method to the `CarPark` class. When you print a `Car park` object, this method will be called. The method should return a string containing the car park's location and capacity. For example, `"Car park at 123 Example Street, with 100 bays."`.
+4. Notice that plates, sensors, and displays are lists ("plurals"). Sensors/Displays, hold references to instances of sensors/displays.Plates, holds reference to license plates represented as strings (built-in/primitive types). Specifying these at initialization is optional, but we don't want to use an empty list as the default. For example, `self.sensors = []`. Lists are **mutable**, and we must never set mutable defaults for parameters. Thus we make the defaults `None`.
+5. Add a `__str__` method to the `CarPark` class. This method will be called when you print a `Car park` object. The method should return a string containing the car park's location and capacity. For example, `"Car park at 123 Example Street, with 100 bays."`.
 6. Your car park class should now look similar to this:
 
    ```python
@@ -152,7 +152,7 @@ Include a screenshot of your GitHub repository `src/` directory **after** you ha
    - `car_park`
 2. Add instance variables for each of the parameters. For example, `self.id = id`.
 3. Add default values for parameters, such that there is no default for id or car park, but there is a default for message and status. For example, `message = ""` and `is_on = False`.
-4. Create a `__str__` method for the `Display` class. This method will be called when you print a `Display` object. The method should return a string containing the display's ID and message. For example, `"Display 1: Welcome to the car park."`.
+4. Create a `__str__` method for the `Display` class. This method will be called when you print a `Display` object. The method should return a string containing the display's id and message. For example, `"Display 1: Welcome to the car park."`.
 
 #### Sensor class
 
@@ -214,7 +214,7 @@ s2
 
 ### Relate the classes
 
-Let's consider how the classes relate to each other. We can start by using a sequence diagram to illustrate class interactions. A sequence diagram shows the interactions between objects in a sequential order. The following diagram shows the interactions between the `CarPark`, `Sensor`, and `Display` classes.
+Let's consider how the classes relate to each other. We can start by using a sequence diagram to illustrate the interactions between the classes. A sequence diagram shows the interactions between objects in a sequential order. The following diagram shows the interactions between the `CarPark`, `Sensor`, and `Display` classes.
 
 ```mermaid
 sequenceDiagram
@@ -234,7 +234,7 @@ sequenceDiagram
 
 Notice a sensor detects cars and notifies a car park. The car park then updates the displays. Sensors connect **to** a car park, and a car park connects **to** displays.
 
-In other words, a sensor needs to know about a car park, and a car park needs to know about displays. This is an example of aggregation, where one object holds a reference to another object. In this case, the `CarPark` class holds a reference to instances of the `Display` classes (aggregation); sensors, for their part, hold a reference to a car park.
+In other words, a sensor needs to know about a car park, and a car park needs to know about displays. This is an example of aggregation, where one object holds a reference to another object. In this case, the `CarPark` class holds a reference to instances of the `Display` classes (aggregation); sensors for their part hold a reference to a car park.
 
 The following class diagram presents this relationship:
 
@@ -276,7 +276,7 @@ classDiagram
 
 The diagram omits methods and attributes irrelevant to the relationship between the classes. Notice that the `CarPark` class has a `register` method that allows it to register sensors and displays.
 
-Notice also that displays and sensors reference a car park, and a car park references displays. This kind of two-way relationship is only sometimes advisable. But for this project, it is acceptable.
+Notice also that displays and sensors reference a car park and a car park references displays. This kind of two-way relationship is not always advisable. But for this project, it is acceptable.
 
 ### Implement methods for the CarPark class
 
@@ -287,11 +287,11 @@ Our analysis shows that the car park will need to implement the following method
 - `remove_car`: This method will be called when a car exits the car park. It will remove the plate number and update the displays.
 - `update_displays`: This method will be called when the car park needs to update the displays. It will iterate through the displays and call their `update` method.
 
-As we implement these methods, we may need additional methods and attributes. For example, we may need a method to check if a plate number is already in the car park. We may also need an attribute to store the plate numbers. We can add these as we go.
+As we implement these methods, we may find we need additional methods and attributes. For example, we may need a method to check if a plate number is already in the car park. We may also need an attribute to store the plate numbers. We can add these as we go.
 
 We will focus on these key principles to guide the need for additional methods and attributes:
 
-- **Encapsulation**: We want to hide the class's implementation details from other classes. We can do this by making attributes private and only exposing them through methods.
+- **Encapsulation**: We want to hide the implementation details of the class from other classes. We can do this by making attributes private and only exposing them through methods.
 - **Single Responsibility**: We want each method to have a single responsibility. This will make the code easier to understand and maintain.
 - **DRY**: We want to avoid repeating code or information about the state (Don't Repeat Yourself). We can do this by creating methods and attributes for behaviours and values that are repeated.
 
@@ -306,7 +306,7 @@ We will focus on these key principles to guide the need for additional methods a
 **Stuck?**
 Here are some some hints to help you complete this task:
 
-Even though we often think of exceptions last, we generally want to put them first in our method definitions. This is because exceptions are, well, exceptional. We want to handle them first and then handle the normal flow of the method. This is called a **guard pattern** and is a common pattern in Python and other languages.
+Even though we often think of exceptions last, we generally want to put them first in our method definitions. This is because exceptions are exceptional. We want to handle them first and then handle the normal flow of the method. This is called a **guard pattern** and is a common pattern in Python and other languages.
 Let's do that now. Add the following code to the top of the `register` method:
 
    ```python
@@ -323,13 +323,13 @@ The `isinstance` function checks if an object is an instance of a class. In this
    from display import Display
    ```
 
-Now, we can add the code to add the `component` to the appropriate list. Add the following code to the `register` method:
+Now we can add the code to add the `component` to the appropriate. Add the following code to the `register` method:
 
    ```python
    # ... inside the register method
    if isinstance(component, Sensor):
       self.sensors.append(component)
-   # TODO: add an elif to check if the component is a Display - MUST
+   # add an elif to check if the component is a Display
    ```
 
 **Evidencing:**
@@ -366,21 +366,19 @@ Finally, we are going to create the `update_displays` method. This method will i
 
 You may want to see the number of available bays, the current temperature, and the time.
 
-Now consider, between the `CarPark`, `Sensor`, and `Display` classes, which class is responsible for each piece of information? There's no right or wrong answer here. But you should be able to justify your answer.
+Now consider, between the `CarPark`, `Sensor`, and `Display` classes, which class is responsible for each of these pieces of information? There's no right or wrong answer here. But you should be able to justify your answer.
 
->Q. Which class is responsible for the number of available bays (and why)?
->
->Q. Which class is responsible for the current temperature (and why)?
->
->Q. Which class is responsible for the time (and why)?
->
+Q. Which class is responsible for the number of available bays (and why)?
+Q. Which class is responsible for the current temperature (and why)?
+Q. Which class is responsible for the time (and why)?
+
 --------
 
 ##### Detour: implement available bays
 
-You realize that you need to maintain the number of available bays. The number of available bays is a curious case. On the one hand, this value is an attribute of the car park. However, it is also a **property** of the car park's capacity and the number of cars in the car park. In other words, it is a **derived** value. We can calculate the number of available bays by subtracting the number of cars from the capacity. We can do this in the `CarPark` class by adding a `get_available_bays` method. This method will return the number of available bays.
+You realize that you are not currently maintaining the number of available bays. The number of available bays is a curious case. This value, on the one hand, clearly seems like an attribute of the car park. However, it is also a **property** of the car park's capacity and the number of cars in the car park. In other words, it is a **derived** value. We can calculate the number of available bays by subtracting the number of cars from the capacity. We can do this in the `CarPark` class by adding a `get_available_bays` method. This method will return the number of available bays.
 
-But you're uncomfortable with this because even though you derive the value through a calculation, it still seems like an attribute. Python has a built-in way of treating a method as a simple attribute. We can use it to protect values and make attributes derived via simple calculations easier to access. Fittingly, it is called a **property**. We can create a property by adding a `@property` decorator (we'll learn more about decorators in the diploma) to a method. While we have yet to fully understand decorators, the important thing is that they make a method act like an attribute.
+But you're uncomfortable with this because even though you derive the value through a calculation it still seems like an attribute. Python has a built-in way to treat a method as though it is a simple attribute. We can use it to protect values as well as make attributes derived via simple calculations easier to access. Fittingly, it is called a **property**. We can create a property by adding a `@property` decorator (we'll learn more about decorators in the diploma) to a method. While we don't yet fully understand decorators, the important thing is that they make a method act like an attribute.
 
 Let's add `available_bays` as a property now:
 
@@ -393,15 +391,15 @@ Let's add `available_bays` as a property now:
 
 Notice that we did **not** use a verb in a property name. This is because properties are accessed like attributes. For example, `car_park.available_bays` instead of `car_park.get_available_bays()`.
 
-A bonus is that if someone accidentally tries to set the value to this property, they will get an error. This is because we have not defined a property setter, and this is a good thing in this case.
+An added bonus is that if someone accidentally tries to set the value to this property, they will get an error. This is because we have not defined a property setter, and this is a good thing in this case.
 
-You recognize an issue: What if the number of cars that enter exceeds capacity?
+You recognize an issue: what if the number of cars that entered exceeds capacity?
 
 We might not be able to stop this from happening!
 
-But what should happen if it does? Do we want to allow the number of available bays to be negative? Or should we set it to zero? Or should we raise an exception? Something else?
+But what should happen if it does? Do we want to allow the number of available bays to be negative? Or should we set it to zero? Or should we raise an exception? Something else??
 
-You discussed with the senior developer and decided that if the number of plates exceeds the capacity, you will return 0.
+You discuss with the senior developer and decide that if the number of plates exceeds the capacity you will return 0.
 
 > Modify the `available_bays` property to return 0 if the number of plates exceeds the capacity.
 
@@ -409,12 +407,12 @@ You discussed with the senior developer and decided that if the number of plates
 
 #### Back to the update displays method
 
-The `update_displays` method shall send status information: available bays, temperature, and other relevant information to each display. We will implement this method in the `CarPark` class.
+The `update_displays` method shall send status information: available bays, temperature, and any other relevant information to each display. We will implement this method in the `CarPark` class.
 
 1. Create an `update_displays` method in the `CarPark` class. This method only needs to accept the `self` parameter.
 2. Build a dictionary containing the information you want to send to the displays. For example, `data = {"available_bays": self.available_bays, "temperature": 25}`.
 3. Iterate through the `displays` list and call the `update` method on each display. For example, `for display in self.displays: display.update(data)`.
-4. Create an `update` method for the `Display` class. This method should accept a single parameter, `data`. For now, we will print the keys and values. Here is a sample implementation:
+4. Create a `update` method for the `Display` class. This method should accept a single parameter, `data`. For now, we will simply print the keys and values. Here is a sample implementation:
 
    ```python
    # ... inside the Display class
@@ -468,6 +466,7 @@ Answer the following questions:
 >     Disadvantage: Dictionaries don't enforce a specific structure, which can lead to errors if the expected 
 >     keys or values are not present.
 >     `
+
 
 #### Add a detect vehicle method to the Sensor class
 
@@ -785,8 +784,6 @@ Next, we'll create tests for the `Display` class. These tests will test the `__i
 
 Finally, we'll create tests for the `Sensor` class. These tests will test the `__init__` method and the `detect_vehicle` method. Implement at least two relevant unit tests.
 
-> **Note**: Because the Sensor is abstract you cannot directly test it. You can only test its concrete subclasses.
-
 ### Test the car park register method
 
 The car park register method should accept a `Sensor` or `Display` object. It should raise a `TypeError` if the object is neither a `Sensor` nor a `Display`. Before proceeding, think about where you would test this behaviour. Should you test it in the `CarPark` unit tests or the `Sensor` unit tests? Why?
@@ -794,7 +791,6 @@ The car park register method should accept a `Sensor` or `Display` object. It sh
 > We should test the CarPark register method in the CarPark unittests. The reason for this is that the register method is part of the CarPark class's functionality.
   We are not concerned with the internal working of the Sensor or Display classes, only concerned with how the CarPark class interacts with them.
   The CarPark class raises TypeError when attempting to register an object that is neither a Sensor nor a Display.
-
 
 Create a new unit test in the `test_car_park.py` file called `test_register_raises_type_error`. This test should create a `CarPark` object and a `str` object. It should then call the `register` method on the `CarPark` object with the `str` object as a parameter. The test should assert that a `TypeError` is raised. Here is a sample implementation:
 
@@ -804,299 +800,12 @@ with self.assertRaises(TypeError):
    self.car_park.register("Not a Sensor or Display")
 ```
 
-**Evidencing:**
 
-Commit your original test cases for the sensor class to the local repository. Tag the commit with `s8` so your lecturer can find it.
 
-### Additional functionality: TDD
-
-You have been asked to implement the following additional functionality:
-
-- Log cars entering and leaving in a file called `log.txt`.
-- Store the configuration of a car park in a file called `config.json`.
-
-You decide to use TDD to implement this functionality. You start by writing a unit test for each requirement. You then implement the functionality to make the unit tests pass. Because you've already developed and tested much of the core functionality, you also decide to create a branch for this work.
-
-Working in a branch allows you to work on the new functionality without affecting the core functionality. You can then merge the branch back into the main branch when you are done. This is a common workflow in software development.
-
-#### Create a branch
-
-Create a new local branch named `feature/log-car-activity`. You can do this either using `git checkout` or the more modern `git switch` command:
-
-   ```bash
-   git switch -c feature/log-car-activity
-   ```
-
-   This command creates a new branch **and** switches to it. Notice that the branch name is prefixed with `feature/` and uses `kebab-case`. This is a common convention for branch naming. Further, notice that we avoid the temptation to combine unrelated functionality in a single branch. This is a common mistake that can lead to problems later on.
-
-#### Log cars entering and leaving in a file called `log.txt`
-
-**Detour – Python file handling:**
-Python is a multi-platform language. This means that it can run on different operating systems. However, different operating systems have different ways of representing files and paths. We therefore want to _abstract_ this representation away from our code. We can do this using the `pathlib` module. This module provides a platform-independent way to represent files and paths. We can use it to create a `Path` object representing a file or directory. We can then use this object to create, read, write, and delete files and directories.
-
-Typically, we import the `Path` class from the `pathlib` module. We can then use the `Path` class to create a `Path` object. For example, `Path("log.txt")` creates a `Path` object that represents a file called `log.txt`. We can then use the `Path` object to create, read, write, and delete files and directories.
-
-**Add test cases: (optional but recommended)**
-
-1. In your `test_car_park.py` file, add the following import statement to the top of the file:
-
-   ```python
-   from pathlib import Path
-   ```
-
-2. Update `test_car_park_initialized_with_all_attributes` to assert (1) that a new optional parameter (2) `log_file` and a new instance variable `log_file` is added. The `log_file` should default to Path(`log.txt`). Here is a sample implementation:
-
-   ```python
-   # ... inside the TestCarPark class
-   def test_car_park_initialized_with_all_attributes(self):
-      # ... existing code
-      self.assertEqual(self.car_park.log_file, Path("log.txt"))
-   ```
-
-3. Create a new unit test in the `test_car_park.py` file called `test_log_file_created`. This test should create a `CarPark` object and assert that a `log.txt` file is created when a car enters or exits the car park. Here is a sample implementation:
-
-   ```python
-
-      # ... inside the TestCarPark class
-      def test_log_file_created(self):
-         new_carpark = CarPark("123 Example Street", 100, log_file = "new_log.txt")
-         self.assertTrue(Path("new_log.txt").exists())
-   ```
-
-When a test creates a file, it is **not** cleaned up automatically. So, we want to ensure that the file is deleted with a `tearDown` method.
-
-4. Add the following code to the `TestCarPark` class:
-
-   ```python
-   # ... inside the TestCarPark class
-   def tearDown(self):
-      Path("new_log.txt").unlink(missing_ok=True)
-   ```
-
---------
-**Bonus:** 
-
-Unlink? What does that mean? It turns out that when you delete files on most operating systems, you unlink the file from a directory entry. The data is still there but can now be overwritten. When we program, we often use the more precise and explicit terms.
---------
-
-Notice how we have inadvertently made our test code hard to maintain (if we change the log file's name, we have to change it in two places). Can you think of a way to improve this code? Hint: consider using a class attribute or new instance variable in the `setUp` method.
-
-5. Finally, there are two more test cases we are going to add. Since you have worked so hard, you can copy/paste this code:
-
-   ```python
-   # inside the TestCarPark class
-   def test_car_logged_when_entering(self):
-      new_carpark = CarPark("123 Example Street", 100, log_file = "new_log.txt") # TODO: change this to use a class attribute or new instance variable
-      self.car_park.add_car("NEW-001")
-      with self.car_park.log_file.open() as f:
-         last_line = f.readlines()[-1]
-      self.assertIn(last_line, "NEW-001") # check plate entered
-      self.assertIn(last_line, "entered") # check description
-      self.assertIn(last_line, "\n") # check entry has a new line
-   
-   def test_car_logged_when_exiting(self):
-      new_carpark = CarPark("123 Example Street", 100, log_file = "new_log.txt") # TODO: change this to use a class attribute or new instance variable
-      self.car_park.add_car("NEW-001")
-      self.car_park.remove_car("NEW-001")
-      with self.car_park.log_file.open() as f:
-         last_line = f.readlines()[-1]
-      self.assertIn(last_line, "NEW-001") # check plate entered
-      self.assertIn(last_line, "exited") # check description
-      self.assertIn(last_line, "\n") # check entry has a new line
-   ```
-
-6. Run the unit tests in PyCharm. Confirm that they fail!
-
-7. Commit your changes to the local repository. You do not need to tag them:
-   
-      ```bash
-      git add .
-      git commit -m "Added unit tests for logging car activity"
-      ```
-
-**Add the functionality: (mandatory)**
-Let's now implement the functionality to make the unit tests pass (if you have written them):
-
-1. Open the `car_park.py` file and add the following import statement to the top of the file:
-
-   ```python
-   from pathlib import Path
-   from datetime import datetime # we'll use this to timestamp entries
-   ```
-
-2. Update the `__init__` method to accept an optional `log_file` parameter. This parameter should default to `Path("log.txt")`. Here is a sample implementation:
-
-   ```python
-   # in CarPark class
-   def __init__(self, location, capacity, plates=None, sensors=None, displays=None, log_file=Path("log.txt")):
-      # ... existing code
-      self.log_file = log_file if isinstance(log_file, Path) else Path(log_file)
-      # create the file if it doesn't exist:
-      self.log_file.touch(exist_ok=True)
-   ```
-
-3. If you have written the unit tests, run them in PyCharm. Confirm that your initialization tests now pass.
-4. Create a private method to log car activity. This method should accept the `plate` and `action` parameters. It should open the `log_file` in append mode and write the plate, action ('entered' or 'exited') and a timestamp to the file. Here is a sample implementation:
-
-   ```python
-   # in CarPark class
-   def _log_car_activity(self, plate, action):
-      with self.log_file.open("a") as f:
-         f.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
-   ```
-
-5. Call the `_log_car_activity` method in the `add_car` **and** `remove_car` methods. Here is a sample implementation for the `add_car` method:
-
-   ```python
-   # in CarPark class
-   def add_car(self, plate):
-      self.plates.append(plate)
-      self.update_displays()
-      self._log_car_activity(plate, "entered")
-   ```
-
-6. If you have created the unit tests, run them in PyCharm. Confirm that they now pass.
 
 **Evidencing:**
 
-1. Add and commit your changes to the branch
-2. Now we are going to merge the branch back into the main branch. First, switch to the main branch:
-
-   ```bash
-   git switch main
-   ```
-
-3. Merge the branch into the main branch and then tag the commit with `s9` so your lecturer can find it:
-
-   ```bash
-   git merge feature/log-car-activity
-   git tag -a "s9" -m "Added logging functionality"
-   ```
-
-4. Push the main branch to the remote repository.
-
-   ```python
-   # in CarPark class
-   def _log_car_activity(self, plate, action):
-      with self.log_file.open("a") as f:
-         f.write(f"{plate} {action} at {datetime.now()}\n")
-   ```
-
-#### Store the configuration of a car park in a file called `config.json`
-
-**Detour – JSON:** JavaScript Object Notation (JSON) is a standard format for storing data. It is a text-based format that is easy for humans to read and write. It is also easy for computers to parse and generate. JSON is often used for storing configuration data (though `yaml` and `toml` are increasingly popular). It is also a standard format for exchanging data between applications. Like most high-level languages, Python has built-in support for JSON.
-
-Now that you're becoming familiar with the process. Try and do the following:
-
-1. (Optional) Create a new branch called `feature/store-config-in-json`
-2. (Optional) Create a new unit test to test that a CarPark can be initialized with a `config_file` parameter.
-3. Do one of the following:
-   - Implement the Config class
-   - Implement a save_config method in the CarPark class that returns a CarPark from a config file
-
-We are going to do the latter:
-
-1. Since we are **not** using a dedicated class, we will remove the config.py file. We can use `git rm` to remove the file and stage the change in one step:
-
-   ```bash
-   git rm src/config.py
-   ```
-
-2. Open the `car_park.py` file and add the following import statement to the top of the file:
-
-   ```python
-   import json
-   ```
-
-3. Implement a `write_config` method in the CarPark class. This method should write the location, log_file, and capacity to a file called `config.json`. Here is a sample implementation:
-
-   ```python
-   # ... inside the CarPark class
-   def write_config(self):
-      with open("config.json", "w") as f: # TODO: use self.config_file; use Path; add optional parm to __init__
-         json.dump({"location": self.location, 
-                    "capacity": self.capacity,
-                    "log_file": str(self.log_file)}, f)
-   ```
-
-   Because JSON is dictionary-like (key-value pairs), we can use a dictionary to represent the configuration. We can then use the `json.dump` method to write the dictionary to a file.
-
-4. Implement a `from_config` method in the CarPark class. This method should accept a single parameter, `config_file`. This parameter should default to `Path("config.json")`. This method should read the `config_file` and return a `CarPark` object. Here is a sample implementation:
-
-   ```python
-   # ... inside the CarPark class
-   @staticmethod
-   def from_config(config_file=Path("config.json")):
-      config_file = config_file if isinstance(config_file, Path) else Path(config_file)
-      with config_file.open() as f:
-         config = json.load(f)
-      return CarPark(config["location"], config["capacity"], log_file=config["log_file"])
-   ```
-
-   Notice that we use the `@staticmethod` decorator. A static method is a method that does not operate on an instance (notice it does not use `self`). For example, `CarPark.from_config()` instead of `car_park.from_config()`. This is useful when we want to create an object from a file or database. We could also have used a class method, but we'll learn about those later.
-
-5. If you have created the unit tests, run them in PyCharm. Confirm that they now pass.
-
-**Evidencing:**
-After you have merged your branch to main, push to your remote with the s10 tag. Add a screenshot of the GitHub repository after pushing the tag, showing the CarPark class with the new methods:
-
-```markdown
-![Added methods to the car park class](images/methods-to-car-park.png)
-```
-
-### Final step: build a car park!
-
-In the final step, you will create a `main.py` file that 'drives' a car park. This file will create a car park, add sensors and displays, and simulate cars entering and exiting the car park. You will then run the file to see the car park in action.
-In your final submission, you must include any files you created or modified. The submission must include the `main.py` file, the `config.json` file, and the `log.txt` file.
-
-#### Create a main.py file
-
-1. Create a new file in the `src/` directory called `main.py`.
-2. Add the following import statements to the top of the file:
-
-   ```python
-   from car_park import CarPark
-   from sensor import EntrySensor, ExitSensor
-   from display import Display
-   ```
-
-3. Now complete all the TODO steps outlined below:
-
-   ```python
-   # TODO: create a car park object with the location moondalup, capacity 100, and log_file "moondalup.txt"
-   # TODO: create an entry sensor object with id 1, is_active True, and car_park car_park
-   # TODO: create an exit sensor object with id 2, is_active True, and car_park car_park
-   # TODO: create a display object with id 1, message "Welcome to Moondalup", is_on True, and car_park car_park
-   # TODO: drive 10 cars into the car park (must be triggered via the sensor - NOT by calling car_park.add_car directly)
-   # TODO: drive 2 cars out of the car park (must be triggered via the sensor - NOT by calling car_park.remove_car directly)
-   ```
-
-4. Run the `main.py` file in PyCharm. Confirm that the car park is working as expected.
-
-**Evidencing:**
-
-1. Add a screenshot of the output of the `main.py` file:
-
-   ```markdown
-   ![Main.py output](images/main-py.png)
-   ```
-
-2. Commit your changes to the local repository. Tag the commit with `v1`, so your lecturer can find it. Ensure the commit includes the log and config files (though you would typically ignore them).
-3. Push the tag to the remote repository.
-
-   ```bash
-   git push --tags
-   ```
-
-4. Release your code on GitHub. You can do this by going to the releases section and selecting "Create a new release". Give the release a title ("Project Submission") and description. Then click "Publish release". Include a screenshot of the release:
-
-   ```markdown
-   ![Create a release](images/create-release.png)
-
-   ![Publish a release](images/publish-release.png)
-   ```
-
-5. Congratulations! You have completed the project. You can now submit the assignment via Blackboard. Take the time to reflect on your work and write any notes and observations down.
+Commit your original test cases for the sensor class to the local repository. Tag the commit with s8 so your lecturer can find it.
 
 --------
 
