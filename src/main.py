@@ -1,37 +1,33 @@
 from car_park import CarPark
-from sensor import Sensor
+from sensor import EntrySensor, ExitSensor
 from display import Display
-from sensor import EntrySensor
-from sensor import ExitSensor
+from pathlib import Path
 
 def main():
-    # create a car park
-    car_park=CarPark(location="Moondalup", capacity=100)
-    # Create displays and sensors
-    main_display = Display(id=1, car_park=car_park)
-    entry_sensor = EntrySensor(id=2, car_park=car_park)
-    exit_sensor = ExitSensor(id=3, car_park=car_park)
+    # TODO: create a car park object with the location Moondalup, capacity 100, and log_file "moondalup.txt"
+    moondalup_park = CarPark(location="Moondalup", capacity=100, log_file=Path("moondalup.txt"))
 
-    # Register displays and sensors with the car park
-    car_park.register(main_display)
-    car_park.register(entry_sensor)
-    car_park.register(exit_sensor)
+    # TODO: create an entry sensor object with id 1, is_active True, and car_park moondalup_park
+    entry_sensor = EntrySensor(id=1, is_active=True, car_park=moondalup_park)
 
-    # Simulate car detection and entry
-    entry_sensor.detect_vehicle()
+    # TODO: create an exit sensor object with id 2, is_active True, and car_park moondalup_park
+    exit_sensor = ExitSensor(id=2, is_active=True, car_park=moondalup_park)
 
-    # Update displays with the current status
-    car_park.update_displays()
+    # TODO: create a display object with id 1, message "Welcome to Moondalup", is_on True, and car_park moondalup_park
+    display = Display(id=1, message="Welcome to Moondalup", is_on=True, car_park=moondalup_park)
 
-    # Simulate car leaving
-    exit_sensor.detect_vehicle()
+    # TODO: drive 10 cars into the car park (must be triggered via the sensor - NOT by calling car_park.add_car directly)
+    for _ in range(10):
+        entry_sensor.detect_vehicle()
 
-    # Update displays after exit
-    car_park.update_displays()
+    # TODO: drive 2 cars out of the car park (must be triggered via the sensor - NOT by calling car_park.remove_car directly)
+    for _ in range(2):
+        exit_sensor.detect_vehicle()
 
+    # Optionally, update displays after driving cars in and out
+    moondalup_park.update_displays()
 
 if __name__ == "__main__":
     main()
-
 
 # THE END!!!!!!!!!!!

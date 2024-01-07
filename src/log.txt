@@ -26,3 +26,11 @@ FAKE-453 entered on the 07-01 11:30
 FAKE-453 exited on the 07-01 11:30
 FAKE-671 entered on the 07-01 11:35
 FAKE-671 exited on the 07-01 11:35
+FAKE-237 entered on the 07-01 12:01
+FAKE-237 exited on the 07-01 12:01
+FAKE-593 entered on the 07-01 12:20
+FAKE-593 exited on the 07-01 12:20
+FAKE-789 entered on the 07-01 12:24
+FAKE-789 exited on the 07-01 12:24
+FAKE-463 entered on the 07-01 12:52
+FAKE-463 exited on the 07-01 12:52

@@ -11,7 +11,8 @@ class CarPark:
                  plates=None,
                  sensors=None,
                  displays=None,
-                 log_file=Path("log.txt")):
+                 log_file=Path("log.txt"),
+                 config_file=Path("config.json")):
         self.location = location
         self.capacity = capacity
         self.plates = plates or []
@@ -77,3 +78,19 @@ class CarPark:
                            )
             print(f"Updating: {display}")
 
+    def _log_car_activity(self, plate, action):
+        with self.log_file.open("a") as f:
+            f.write(f"{plate} {action} at {datetime.now()}\n")
+
+    def write_config(self):
+        with open("config.json", "w") as f:  # TODO: use self.config_file; use Path; add optional parm to __init__
+            json.dump({"location": self.location,
+                       "capacity": self.capacity,
+                       "log_file": str(self.log_file)}, f)
+
+    @staticmethod
+    def from_config(config_file=Path("config.json")):
+        config_file = config_file if isinstance(config_file, Path) else Path(config_file)
+        with config_file.open() as f:
+            config = json.load(f)
+        return CarPark(config["location"], config["capacity"], log_file=config["log_file"])
